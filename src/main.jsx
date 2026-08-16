@@ -12,8 +12,11 @@ import Login from './Components/Login/Login.jsx';
 import Signup from './Components/Signup/Signup.jsx';
 import VerifyOtp from './Components/VerifyOTP/VerifyOtp.jsx';
 import Dashboard from './Components/Dashboard/Dashboard.jsx';
+import JustLayout from './Components/JustLayout.jsx';
+import Orderpage from './Components/Orderpage/Orderpage.jsx';
+import BannerFood from './Components/BannerFood/Bannerfood.jsx';
 const routes = createRoutesFromElements(
-    
+  <> 
   
    <Route path="/" element={<App />}>
       <Route index element={<Home />} />
@@ -23,9 +26,16 @@ const routes = createRoutesFromElements(
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
       <Route path="verify-otp" element={<VerifyOtp />} />
-      <Route path="dashboard" element={<Dashboard />} />
+
     </Route>
-      
+
+    <Route element={<JustLayout />}>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="orderpage" element={<Orderpage />} />
+            <Route path="bannerfood" element={<BannerFood />} />
+            <Route path="orderpage" element={<Orderpage />} />
+    </Route>
+    </>  
   
    
   )

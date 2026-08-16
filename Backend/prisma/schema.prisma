@@ -19,6 +19,7 @@ model User {
   isVerified Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+    
 }
 
 model OTPVerification {
@@ -27,6 +28,12 @@ model OTPVerification {
   otp       String
   expiresAt DateTime
   createdAt DateTime @default(now())
+}
+
+model FoodItems {
+  id        String   @id @default(cuid())
+  name     String   @unique
+  orders  Int 
 }
 
 enum Role {

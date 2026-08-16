@@ -39,20 +39,20 @@ import { Clock, Star } from "lucide-react";
 
 function Card({ title, image }) {
   return (
-    <div className=" w-full rounded-3xl   shadow-2xl">
-      <div className="flex ">
+    <div className=" w-full   shadow-2xl">
+      
 
 
         
-        <div className="w-full rounded-3xl  bg-[#111827] ">
+        <div className="w-full rounded-3xl overflow-hidden bg-[#111827] ">
           <img
             src={image}
             alt={title}
-            className="w-full object-cover h-screen! "
+            className="w-full object-cover h-[550px] "
           />
         </div>
       </div>
-    </div>
+   
   );
 }
 
