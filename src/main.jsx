@@ -15,6 +15,8 @@ import Dashboard from './Components/Dashboard/Dashboard.jsx';
 import JustLayout from './Components/JustLayout.jsx';
 import Orderpage from './Components/Orderpage/Orderpage.jsx';
 import BannerFood from './Components/BannerFood/Bannerfood.jsx';
+import OrderSucessfull from './Components/OrderSuccessfull/OrderSuccessfull.jsx';
+import Orders from './Components/Orders/Orders.jsx';
 const routes = createRoutesFromElements(
   <> 
   
@@ -34,6 +36,8 @@ const routes = createRoutesFromElements(
             <Route path="orderpage" element={<Orderpage />} />
             <Route path="bannerfood" element={<BannerFood />} />
             <Route path="orderpage" element={<Orderpage />} />
+            <Route path="orders" element={<Orders/>} />
+            <Route path="ordersuccess" element={<OrderSucessfull />} />
     </Route>
     </>  
   

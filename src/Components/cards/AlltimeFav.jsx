@@ -8,7 +8,8 @@ import MushroomMasala from "../../assets/Alltimefav/MushroomMasala.jpeg";
 import FalafelBowl from "../../assets/Alltimefav/FalafelBowl.jpeg";
 import SowaChaap from "../../assets/Alltimefav/SowaChaap.jpeg";
 import Pancakes from "../../assets/Alltimefav/Pancakes.jpeg";
-
+import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
 
 export default function Alltimefav() {
   const items = [
@@ -24,6 +25,20 @@ export default function Alltimefav() {
   { name: 'Sowa Chaap', price: '₹279', img: SowaChaap },
   { name: 'Chocolate Pancakes', price: '₹219', img: Pancakes },
 ];
+const navigate = useNavigate();
+  function HandleClick(food){
+    const selectedFood={
+      ...food,
+      quantity:1
+    };
+     setCart([selectedFood]);
+      navigate("/orderpage", {
+      state: {
+        cart: [selectedFood],
+      }
+    });
+  }
+
 
   return (
     <div className='overflow-x-auto whitespace-nowrap scrollbar-hide'>
@@ -42,7 +57,8 @@ export default function Alltimefav() {
             <h2 className='text-lg font-semibold mt-3'>{item.name}</h2>
             <p className='text-gray-600 items-end mt-4 justify-end'>{item.price}</p>
             </div>
-            <button className="bg-green-500 p-2 pl-4 pr-4 rounded items-center justify-center ml-10 mt-1">Order Now</button>
+            <button className="hover:bg-green-200 hover:border-black hover:border-2 bg-green-500 p-2 pl-4 pr-4 rounded items-center justify-center ml-10 mt-1"
+            onClick={()=>HandleClick(item)}>Order Now</button>
             
           </div>
         ))}

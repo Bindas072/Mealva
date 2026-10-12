@@ -8,6 +8,8 @@ import CheeseBalls from "../../assets/CustomerChoice/CheeseBalls.jpeg";
 import VegHotDog from "../../assets/CustomerChoice/VegHotDog.jpeg";
 import MangoSmoothie from "../../assets/CustomerChoice/MangoSmoothie.jpeg";
 import Brownie from "../../assets/CustomerChoice/Brownie.jpeg";
+import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
 
 
 
@@ -26,6 +28,20 @@ export default function CustomerChoice() {
   { name: 'Brownie with Ice Cream', price: '₹229', img: Brownie },
 
 ];
+const navigate = useNavigate();
+  function HandleClick(food){
+    const selectedFood={
+      ...food,
+      quantity:1
+    };
+     setCart([selectedFood]);
+      navigate("/orderpage", {
+      state: {
+        cart: [selectedFood],
+      }
+    });
+  }
+
 
   return (
     <div className='overflow-x-auto whitespace-nowrap scrollbar-hide'>
@@ -44,7 +60,8 @@ export default function CustomerChoice() {
             <h2 className='text-lg font-semibold mt-3'>{item.name}</h2>
             <p className='text-gray-600 items-end mt-4 justify-end'>{item.price}</p>
             </div>
-            <button className="bg-green-500 p-2 pl-4 pr-4 rounded items-center justify-center ml-10 mt-1">Order Now</button>
+            <button className="hover:bg-green-200 hover:border-black hover:border-2 bg-green-500 p-2 pl-4 pr-4 rounded items-center justify-center ml-10 mt-1"
+            onClick={()=>HandleClick(item)}>Order Now</button>
             
           </div>
         ))}

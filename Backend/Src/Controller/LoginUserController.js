@@ -28,15 +28,19 @@ try{
                 u_id : user.id
             };
         const token = jwt.sign(payload,process.env.JWT_SECRET);
+        console.log(token)
 
-        res.cookie("token", token,{
+        res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            maxAge: 3600000
-        })
-        return res.status(200).json({
-            message:"Login Sucessful"
-        })
+            secure: false,
+            sameSite: "lax",
+            path: "/",
+            maxAge: 60 * 60 * 1000,
+            });
+
+return res.status(200).json({
+  message: "Login Successful",
+});
         }
     }
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Menu ,X,Equal,User,ShoppingBag,Info} from "lucide-react";
 // import { Sidebar,Menu, MenuItem } from 'react-pro-sidebar'
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import TodaySpecial from '../cards/TodaySpecial';
 import CustomerChoice from '../cards/CustomerChoice';
 import Card from '../cards/cards';
@@ -10,10 +10,14 @@ import FoodMenu from '../cards/FoodMenu';
 import Alltimefav from '../cards/AlltimeFav';
 export default function Dashboard() {
     const location = useLocation();
+    const navigate = useNavigate();
   const UserName =location.state?.UserName;
   console.log(UserName)
   const [ShowSidebar,setShowSidebar]=useState(true)
   const [showselected,setshowselected]=useState(true)
+  function HandleClick(){
+    navigate('/orders')
+  }
 
   
   return (
@@ -36,8 +40,14 @@ export default function Dashboard() {
         </div>
 
         <ul className="mt-6 space-y-4 text-lg  ">
-          <li className='flex hover:bg-green-900  hover:border-2 rounded  px-4 py-3'><button className='pr-4 items-center '> <User size={20} /></button >Profile</li>
-          <li className='flex hover:bg-green-900  hover:border-2 rounded px-4 py-3'><button className='pr-4 items-center '> <ShoppingBag size={20} /></button >Orders</li>
+          <li className='flex hover:bg-green-900  hover:border-2 rounded  px-4 py-3'><button className='pr-4 items-center ' > <User size={20} /></button >Profile</li>
+          <li className="flex hover:bg-green-900 hover:border-2 rounded px-4 py-3">
+                    <button  type="button"
+                      onClick={HandleClick}
+                      className="flex items-center gap-4 w-full text-left">
+                      <ShoppingBag size={20} />
+                      <span>Orders</span>
+                    </button></li>
           <li className='flex hover:bg-green-900  hover:border-2 rounded px-4 py-3'><button className='pr-4 items-center '><Info size={20} /></button>About Us</li>
         </ul>
       </div>

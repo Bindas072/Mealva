@@ -15,6 +15,7 @@
     "jotai": "^2.20.2",
     "lucide-react": "^1.20.0",
     "prisma": "^6.19.0",
+    "qrcode.react": "^4.2.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-pro-sidebar": "^1.1.0",

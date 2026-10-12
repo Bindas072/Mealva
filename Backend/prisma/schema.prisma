@@ -12,14 +12,12 @@ model User {
   id         String   @id @default(cuid())
   name       String
   email      String   @unique
-  // phone      String?  @unique
   password   String
-  username   String?  @unique
-  // role       Role     @default(CUSTOMER)
   isVerified Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-    
+  username   String?  @unique
+  Orders     Orders[]
 }
 
 model OTPVerification {
@@ -31,9 +29,22 @@ model OTPVerification {
 }
 
 model FoodItems {
-  id        String   @id @default(cuid())
-  name     String   @unique
-  orders  Int 
+  id     String @id @default(cuid())
+  name   String @unique
+  orders Int
+}
+
+model Orders {
+  id            String    @id @default(cuid())
+  userId        String?
+  paymentMethod String   @default("upi")
+  paymentStatus String   @default("PENDING")
+  orderStatus   String   @default("PLACED")
+  createdAt     DateTime @default(now())
+  orderitems    String
+  quantity      Int
+  price         Float
+  User          User?    @relation(fields: [userId], references: [id])
 }
 
 enum Role {
