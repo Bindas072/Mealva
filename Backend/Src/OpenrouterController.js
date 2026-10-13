@@ -2,6 +2,8 @@
 import { OpenRouter } from "@openrouter/sdk";
 import { getMyOrdersTool } from "./Tools/getmyOrdersTool.js";
 import { getmyOrderHandler } from "./Tools/getmyOrdersHandler.js";
+import { recommendFoodsHandler } from "./Tools/recommendFoodsHandler.js";
+import { recommendFoodsTool } from "./Tools/recommendFoodsTool.js";
 
 export async function OpenrouterController(req, res) {
   try {
@@ -38,7 +40,7 @@ export async function OpenrouterController(req, res) {
       chatRequest: {
         model: "nvidia/nemotron-3-ultra-550b-a55b:free",
         messages,
-        tools: [getMyOrdersTool],
+        tools: [getMyOrdersTool,recommendFoodsTool],
         tool_choice: "auto",
         stream: false,
       },
@@ -65,6 +67,18 @@ export async function OpenrouterController(req, res) {
           });
         }
       }
+    }
+ else if (tool.function?.name === "recommendFoods") {
+  const args = JSON.parse(tool.function.arguments || "{}");
+
+  const foods = await recommendFoodsHandler(args);
+
+  messages.push({
+    role: "tool",
+    toolCallId: tool.id,
+    content: JSON.stringify(foods),
+  });
+}
 
       // Second AI request
       result = await openrouter.chat.send({
@@ -79,7 +93,7 @@ export async function OpenrouterController(req, res) {
       message = result.choices?.[0]?.message;
 
 
-    }
+    
 
     return res.status(200).json({
       answer:
