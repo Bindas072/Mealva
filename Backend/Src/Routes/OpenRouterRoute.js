@@ -1,5 +1,5 @@
 import express from 'express';
-import { OpenrouterController } from '../OpenrouterController.js';
+import { OpenrouterController } from '../Controller/OpenrouterController.js';
 import { AuthenticationMiddleware } from '../Middleware/AuthenticationMiddleware.js';
 
 const OpenrouterRoute= express.Router();

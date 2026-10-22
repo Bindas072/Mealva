@@ -8,8 +8,8 @@ export const MyOrdersController = async (req, res) => {
       where: {
         userId: userId,
       },
-       orderBy: {
-    createdAt: "desc",
+      orderBy: {
+      createdAt: "desc",
   },
     });
     

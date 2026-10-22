@@ -8,6 +8,7 @@ import Card from '../cards/cards';
 import DashboardBanner from '../Banner/DashboardBanner';
 import FoodMenu from '../cards/FoodMenu';
 import Alltimefav from '../cards/AlltimeFav';
+import MealvaAiBtn from '../cards/mealvaAiBtn';
 export default function Dashboard() {
     const location = useLocation();
     const navigate = useNavigate();
@@ -87,6 +88,7 @@ export default function Dashboard() {
   </h1>
   <div className='overflow-auto'><CustomerChoice/></div>
 </div>
+  <MealvaAiBtn/>
 </div> 
 
 </div>

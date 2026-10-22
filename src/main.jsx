@@ -17,6 +17,7 @@ import Orderpage from './Components/Orderpage/Orderpage.jsx';
 import BannerFood from './Components/BannerFood/Bannerfood.jsx';
 import OrderSucessfull from './Components/OrderSuccessfull/OrderSuccessfull.jsx';
 import Orders from './Components/Orders/Orders.jsx';
+import MealvaAi from './MealvaAi/MealvaAi.jsx';
 const routes = createRoutesFromElements(
   <> 
   
@@ -38,6 +39,7 @@ const routes = createRoutesFromElements(
             <Route path="orderpage" element={<Orderpage />} />
             <Route path="orders" element={<Orders/>} />
             <Route path="ordersuccess" element={<OrderSucessfull />} />
+            <Route path="mealvaAi" element={<MealvaAi />} />
     </Route>
     </>  
   

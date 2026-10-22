@@ -1,23 +1,24 @@
+
 export const recommendFoodsTool = {
   type: "function",
   function: {
     name: "recommendFoods",
     description:
-      "Find food items by meal category and maximum price.",
+      "Recommend available foods by meal category. Apply maxPrice only when the user specifies a budget.",
     parameters: {
       type: "object",
       properties: {
         category: {
           type: "string",
           enum: ["Breakfast", "Lunch", "Dinner"],
-          description: "The meal category requested by the user",
+          description: "Requested meal category",
         },
         maxPrice: {
           type: "number",
-          description: "Maximum price in rupees",
+          description: "Optional maximum price in rupees",
         },
       },
-      required: ["category", "maxPrice"],
+      required: ["category"],
       additionalProperties: false,
     },
   },
