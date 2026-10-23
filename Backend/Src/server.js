@@ -8,6 +8,8 @@ import cors from "cors";
 import ConfirmOrderRoute from './Routes/ConfirmOrderRoute.js';
 import MyOrdersRoute from './Routes/MyOrdersRoute.js';
 import OpenrouterRoute from './Routes/OpenRouterRoute.js';
+import getConversationsRoute from './Routes/getConversationsRoute.js';
+import getConversationMessagesRoute from './Routes/getConversationMessagesRoute.js';
 dotenv.config();
 
 const app = express()
@@ -28,6 +30,8 @@ app.use('/',VerifyOTProute)
 app.use('/',ConfirmOrderRoute)
 app.use('/',MyOrdersRoute)
 app.use('/',OpenrouterRoute)
+app.use ('/',getConversationsRoute)
+app.use('/',getConversationMessagesRoute)
 
 
 app.listen(port,()=>{

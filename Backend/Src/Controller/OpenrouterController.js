@@ -1,7 +1,7 @@
 
 import { OpenRouter } from "@openrouter/sdk";
 import prisma from "../prisma.js";
-
+import { generateChatTitle } from "../Tools/generateChatTitle.js";
 import { getMyOrdersTool } from "../Tools/getmyOrdersTool.js";
 import { getmyOrderHandler } from "../Tools/getmyOrdersHandler.js";
 import { recommendFoodsHandler } from "../Tools/recommendFoodsHandler.js";
@@ -54,10 +54,11 @@ export async function OpenrouterController(req, res) {
         });
       }
     } else {
+      const chatTitle = await generateChatTitle(cleanQuestion, process.env.API_KEY);
       conversation = await prisma.chatConversation.create({
         data: {
           userId,
-          title: cleanQuestion.slice(0, 60),
+          title: chatTitle,
         },
       });
     }
@@ -191,7 +192,10 @@ Your responsibilities:
         try {
           if (tool.function.name === "getMyOrders") {
             toolResult = await getmyOrderHandler(userId);
-            recentOrders = toolResult;
+             const limit = Number(args.limit) || 5;
+
+              toolResult = await getmyOrderHandler(userId, limit);
+              recentOrders = toolResult;
           } else if (tool.function.name === "recommendFoods") {
             toolResult = await recommendFoodsHandler(args);
 

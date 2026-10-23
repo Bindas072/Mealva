@@ -1,7 +1,17 @@
 
 import prisma from "../prisma.js";
 
-export async function getmyOrderHandler(userId) {
+export async function getmyOrderHandler(userId, limit = 5) {
+  if (!userId) {
+    throw new Error("User ID is required");
+  }
+
+  // Limit the number of orders returned
+  const safeLimit = Math.min(
+    Math.max(Number.parseInt(limit, 10) || 5, 1),
+    20
+  );
+
   const orders = await prisma.orders.findMany({
     where: {
       userId,
@@ -9,6 +19,7 @@ export async function getmyOrderHandler(userId) {
     orderBy: {
       createdAt: "desc",
     },
+    take: safeLimit,
   });
 
   const ordersWithImages = await Promise.all(
@@ -21,11 +32,10 @@ export async function getmyOrderHandler(userId) {
             ? JSON.parse(order.orderitems)
             : order.orderitems || [];
       } catch {
-        // Older orders store just the food name, e.g. "Paneer Burger"
         items = [];
       }
 
-      // Your current takeOrderHandler saves a single food name as a string.
+      // Handle older orders that store a single food name as a string
       const foodName =
         typeof order.orderitems === "string" &&
         !order.orderitems.trim().startsWith("[") &&
