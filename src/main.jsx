@@ -47,7 +47,9 @@ const routes = createRoutesFromElements(
    
   )
 
-const router = createBrowserRouter(routes)
+const router = createBrowserRouter(routes,{
+  basename: "/Mealva",
+})
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
